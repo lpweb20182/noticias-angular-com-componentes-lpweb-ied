@@ -1,11 +1,9 @@
 <h1>Notícias::Angular</h1>
 <hr>
-<nav>
-  <button (click)="irPara('home')">Home</button> |
-  <button (click)="irPara('lista')">Todas as notícias</button> |
-  <button (click)="irPara('cadastro')">Cadastrar</button>
-</nav>
+<app-barra-navegacao (acao)="irPara($event)"></app-barra-navegacao>
 <hr>
+  
+  
 
 <div *ngIf="tela == 'home'">
   <h2>Notícias recentes</h2>
