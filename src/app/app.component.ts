@@ -73,11 +73,6 @@ export class AppComponent implements OnInit {
   editarNoticia = null;
 
   /**
-   * Atributo utilizado para controlar a pesquisa da lista de notícias
-   */
-  listaPesquisa = null;
-
-  /**
    * Implementação da interface {@link OnInit}. Define dados de exemplo
    */
   ngOnInit() {
@@ -107,6 +102,7 @@ export class AppComponent implements OnInit {
    */
   salvar(form) {
     if (!this.editarNoticia) {
+      console.log(form)
       const noticia = new Noticia(
         this.noticias.length,
         this.titulo,
@@ -115,6 +111,7 @@ export class AppComponent implements OnInit {
         this.emailDoAutor,
         this.data
       );
+      console.log(noticia)
       this.noticias.push(noticia);
     } else {
       const noticia = this.noticias.find(n => n.id === this.editarNoticia.id);
@@ -133,24 +130,15 @@ export class AppComponent implements OnInit {
     this.irPara('lista');
   }
 
-  /**
-   * Apresenta uma notícia (tela de leitura)
-   * @param noticia A notícia que deve ter o conteúdo apresentado
-   */
-  mostrar(noticia) {
-    this.leituraNoticia = noticia;
-    this.irPara('leitura');
+  todasaNoticias(){
+    return this.noticias;
   }
 
-  /**
-   * Fecha a tela de leitua e apresenta a tela home.
-   */
-  fechar() {
-    this.leituraNoticia = null;
-    this.irPara('home');
-  }
+  pegarNoticia(){
+    return this.leituraNoticia;
+}
 
-  /**
+      /**
    * Encontra e retorna as notícias publicadas. 
    * 
    * Utiliza os métodos da classe {@link Array}: 
@@ -175,6 +163,23 @@ export class AppComponent implements OnInit {
   }
 
   /**
+   * Apresenta uma notícia (tela de leitura)
+   * @param noticia A notícia que deve ter o conteúdo apresentado
+   */
+  mostrar(noticia) {
+    this.leituraNoticia = noticia;
+    this.irPara('leitura');
+  }
+
+  /**
+   * Fecha a tela de leitua e apresenta a tela home.
+   */
+  fechar() {
+    this.leituraNoticia = null;
+    this.irPara('home');
+  }
+
+  /**
    * Muda a tela visível.
    * @param nome O nome da nova tela (que deve se tornar visível)
    */
@@ -187,26 +192,6 @@ export class AppComponent implements OnInit {
       this.autor = null;
       this.emailDoAutor = null;
       this.data = null;
-    }
-  }
-
-  /**
-   * Encontra e retorna as notícias para a lista conforme o campo 
-   * de pesquisa [`listaPesquisa`]{@link AppComponent#listaPesquisa}
-   * considerando que seu valor está presente no título, conteúdo ou 
-   * nome do autor.
-   * 
-   * @returns A lista de notícias para apresentar
-   */
-  noticiasParaLista() {
-    if (this.listaPesquisa) {
-      return this.noticias.filter(n =>
-        n.titulo.indexOf(this.listaPesquisa) !== -1
-        || n.conteudo.indexOf(this.listaPesquisa) !== -1
-        || n.autor.indexOf(this.listaPesquisa) !== -1
-      );
-    } else {
-      return this.noticias;
     }
   }
 

@@ -8,15 +8,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class BarraNavegacaoComponent implements OnInit {
 
   constructor() { }
-  
-
-
   @Output() acao =  new EventEmitter<any>();
-
 
   ngOnInit() {
   }
-
 
  /**
    * Muda a tela visível.
